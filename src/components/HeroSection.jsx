@@ -1,9 +1,11 @@
-import React from "react";
+
+import { useEffect } from "react";
 import echoBg from "../assets/videos/echo-bg.mp4";
 import "./HeroSection.css";
 import { Link } from "react-scroll";
 
 const HeroSection = () => {
+ 
   return (
     <section id="home" className="hero-section">
       {/* Background Video */}

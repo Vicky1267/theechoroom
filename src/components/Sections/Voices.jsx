@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { setDocumentHead } from "../utils/setDocumentHead";
 import Voice1 from '../../assets/img/voices/1.jpg';
 import Voice2 from '../../assets/img/voices/2.jpg';
 import Voice3 from '../../assets/img/voices/3.jpg';
 import Voice4 from '../../assets/img/voices/4.jpg';
 
 const Voices = () => {
+   useEffect(() => {
+    setDocumentHead({
+      title: "Voices | The Echo Room",
+      description:
+        "Hear the stories, opinions, and creative expressions of young Africans who are shaping the future.",
+    });
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [activeStory, setActiveStory] = useState(null);
 

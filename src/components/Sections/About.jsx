@@ -1,4 +1,6 @@
-import React from 'react';
+
+import { useEffect } from "react";
+import { setDocumentHead } from "../utils/setDocumentHead";
 import AbelImg from '../../assets/img/team/1.jpg';
 import TeskaImg from '../../assets/img/team/2.jpg';
 import MathewImg from '../../assets/img/team/3.jpg';
@@ -33,6 +35,13 @@ const teamData = [
 ];
 
 export default function About ({ people = teamData }) {
+  useEffect(() => {
+    setDocumentHead({
+      title: "About | The Echo Room",
+      description:
+        "Learn more about The Echo Room — a youth-driven movement dedicated to amplifying African voices and inspiring social impact.",
+    });
+  }, []);
   return (
     <section id='about' className="bg-[rgb(249,250,251)] text-[rgb(31,41,55)] font-sans leading-relaxed py-[80px]">
       {/* Hero / Header Section */}

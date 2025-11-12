@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { setDocumentHead } from "../utils/setDocumentHead";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Contact = () => {
+  useEffect(() => {
+    setDocumentHead({
+      title: "Contact | The Echo Room",
+      description:
+        "Get in touch with The Echo Room team — collaborate, contribute, or share your voice with our growing community.",
+    });
+  }, []);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = (e) => {
