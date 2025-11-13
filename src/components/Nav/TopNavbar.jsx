@@ -1,130 +1,181 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
-
-// Assets
+import { Menu, X } from "lucide-react"; // ✅ icon library (install with: npm i lucide-react)
 import logo from "../../assets/img/logo.png";
-
 
 export default function TopNavbar() {
   const [y, setY] = useState(window.scrollY);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => setY(window.scrollY));
-    return () => {
-      window.removeEventListener("scroll", () => setY(window.scrollY));
-    };
-  }, [y]);
+    const handleScroll = () => setY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
     <>
-      <Wrapper className="flexCenter animate" style={y > 100 ? { height: "60px" } : { height: "80px" }}>
+      <Wrapper style={y > 100 ? { height: "60px" } : { height: "80px" }}>
         <NavInner className="container flexSpaceCenter">
+          {/* Logo */}
           <Link className="pointer flexNullCenter" to="home" smooth={true}>
-      <img src={logo} alt="Echo Room Logo" style={{ height: "45px" }} />
-   
-            <h1 style={{ marginLeft: "15px", color: "white"}} className="font20 extraBold">
+            <img src={logo} alt="Echo Room Logo" style={{ height: "45px" }} />
+            <h1
+              style={{ marginLeft: "15px", color: "white" }}
+              className="font20 extraBold"
+            >
               Echo Room
             </h1>
           </Link>
+
+          {/* Desktop Menu */}
           <UlWrapper className="flexNullCenter">
-            <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="home" spy={true} smooth={true} offset={-80}>
+            <li>
+              <Link to="home" smooth={true} offset={-80}>
                 Home
               </Link>
             </li>
-            <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="about" spy={true} smooth={true} offset={-80}>
+            <li>
+              <Link to="about" smooth={true} offset={-80}>
                 About Us
               </Link>
             </li>
-            <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="voices" spy={true} smooth={true} offset={-80}>
+            <li>
+              <Link to="voices" smooth={true} offset={-80}>
                 Voices
               </Link>
             </li>
-            <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="contact" spy={true} smooth={true} offset={-80}>
+            <li>
+              <Link to="contact" smooth={true} offset={-80}>
                 Contact
               </Link>
             </li>
           </UlWrapper>
-          <UlWrapperRight className="flexNullCenter">
-            <li className="semiBold font15 pointer flexCenter">
-              <a href="https://chat.whatsapp.com/HYiKqX0ensx2T54dR8vHkb?mode=wwt" target="_blank" 
-          rel="noopener noreferrer" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
+
+          {/* Get Started Button */}
+          <UlWrapperRight>
+            <li>
+              <a
+                href="https://chat.whatsapp.com/HYiKqX0ensx2T54dR8vHkb?mode=wwt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lightBg"
+              >
                 Get Started
               </a>
             </li>
           </UlWrapperRight>
+
+          {/* Hamburger Menu Button */}
+          <BurgerWrapper onClick={toggleMenu}>
+            {menuOpen ? <X color="white" size={26} /> : <Menu color="white" size={26} />}
+          </BurgerWrapper>
         </NavInner>
+
+        {/* Mobile Menu Dropdown */}
+        {menuOpen && (
+          <MobileMenu>
+            <li>
+              <Link to="home" smooth={true} offset={-80} onClick={toggleMenu}>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="about" smooth={true} offset={-80} onClick={toggleMenu}>
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link to="voices" smooth={true} offset={-80} onClick={toggleMenu}>
+                Voices
+              </Link>
+            </li>
+            <li>
+              <Link to="contact" smooth={true} offset={-80} onClick={toggleMenu}>
+                Contact
+              </Link>
+            </li>
+            <li>
+              <a
+                href="https://chat.whatsapp.com/HYiKqX0ensx2T54dR8vHkb?mode=wwt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lightBg"
+                onClick={toggleMenu}
+              >
+                Get Started
+              </a>
+            </li>
+          </MobileMenu>
+        )}
       </Wrapper>
     </>
   );
 }
 
+// 🌐 STYLES
 const Wrapper = styled.nav`
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
-  background-color: #0a1a2f; /* 🎨 Navbar background */
-  color: #ffffff;            /* 🎨 Text color */
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background-color: #0a1a2f;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, height 0.3s ease;
 `;
+
 const NavInner = styled.div`
   position: relative;
   height: 100%;
-`
-const BurderWrapper = styled.button`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+`;
+
+const BurgerWrapper = styled.button`
   outline: none;
-  border: 0px;
+  border: none;
   background-color: transparent;
   height: 100%;
-  padding: 0 15px;
   display: none;
+  cursor: pointer;
   @media (max-width: 760px) {
     display: block;
   }
 `;
-const UlWrapper = styled.ul`
-display: flex;
-  list-style: none;
 
+const UlWrapper = styled.ul`
+  display: flex;
+  list-style: none;
   li a {
-    color: #ffffff; /* 🎨 Nav link text color */
+    color: #ffffff;
     text-decoration: none;
     padding: 10px 15px;
     transition: color 0.3s ease;
   }
-
   li a:hover {
-    color: #00bcd4; /* 🎨 Hover color */
+    color: #00bcd4;
   }
-
   @media (max-width: 760px) {
     display: none;
   }
 `;
+
 const UlWrapperRight = styled.ul`
-     display: flex;
+  display: flex;
   list-style: none;
-
-  li a {
-    color: #ffffff;
-    text-decoration: none;
-  }
-
   li a.lightBg {
-    background-color: #00bcd4; /* 🎨 Button background */
+    background-color: #00bcd4;
     color: #fff;
     border-radius: 8px;
     padding: 10px 15px;
   }
-
   li a.lightBg:hover {
     background-color: #019bb5;
   }
@@ -133,5 +184,31 @@ const UlWrapperRight = styled.ul`
   }
 `;
 
-
-
+const MobileMenu = styled.ul`
+  list-style: none;
+  background-color: #0a1a2f;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  li a:hover {
+    color: #00bcd4;
+  }
+  .lightBg {
+    background-color: #00bcd4;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+  }
+`;

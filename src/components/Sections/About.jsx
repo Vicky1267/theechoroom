@@ -37,13 +37,13 @@ const teamData = [
 export default function About ({ people = teamData }) {
   useEffect(() => {
     setDocumentHead({
-      title: "About | The Echo Room",
+      title: "The Echo Room",
       description:
         "Learn more about The Echo Room — a youth-driven movement dedicated to amplifying African voices and inspiring social impact.",
     });
   }, []);
   return (
-    <section id='about' className="bg-[rgb(249,250,251)] text-[rgb(31,41,55)] font-sans leading-relaxed py-[80px]">
+    <section id='about' className="tailwind-scope bg-[rgb(249,250,251)] text-[rgb(31,41,55)] font-sans leading-relaxed py-[80px]">
       {/* Hero / Header Section */}
       <div className="bg-gradient-to-r from-[rgb(14,116,144)] to-[rgb(30,58,138)] text-white py-[80px] text-center px-[24px]">
         <h1 className="text-[white] text-[40px] md:text-[56px] font-extrabold mb-[16px]">
@@ -108,7 +108,7 @@ export default function About ({ people = teamData }) {
         <h2 className="text-[32px] font-bold text-[rgb(17,24,39)] mb-[32px]">
           Our Values
         </h2>
-        <div className="flex flex-wrap justify-center gap-[12px]">
+        <div className="w-full flex flex-wrap justify-center gap-[12px]">
           {["Authenticity", "Courage", "Dialogue", "Inclusion", "Change"].map(
             (value) => (
               <span
@@ -122,35 +122,36 @@ export default function About ({ people = teamData }) {
         </div>
       </div>
 
-     <div className="py-[64px] px-[24px] md:px-[80px] bg-[rgb(243,244,246)]">
-        <h2 className="text-[32px] font-bold text-center text-[rgb(17,24,39)] mb-[48px]">
-             Meet the Team</h2>
+<div className="py-16 px-4 sm:px-6 md:px-20 bg-gray-100">
+  <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+    Meet the Team
+  </h2>
 
-        {/* Small grid with 1 row and 4 columns */}
-        <div className="grid grid-cols-4 gap-6 place-items-center overflow-x-auto">
-          {people.map((member) => (
-            <article
-              key={member.id}
-              className="bg-[white/10] rounded-2xl p-6 shadow-md text-center w-full max-w-[200px] flex-shrink-0"
-            >
-              <div className="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-[white/20]">
-                <img
-                  src={member.img}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+  <div className="max-w-7xl mx-auto">
+    <div className="grid-container">
+      {people.map((member) => (
+        <article
+          key={member.id}
+          className="bg-[white] rounded-2xl p-6 shadow-md text-center w-full max-w-[220px]"
+        >
+          <div className="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-cyan-500/20">
+            <img
+              src={member.img}
+              alt={member.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-              <div className="mt-3">
-                <h3 className="text-base font-semibold text-[rgb(8,145,178)] p-[10px]">{member.name}</h3>
-                <p className="text-xs text-[gray-300]">{member.role}</p>
-                <p className="text-xs text-[gray-400] mt-2">{member.bio}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-     
+          <div className="mt-3">
+            <h3 className="text-base font-semibold text-cyan-600 p-2">{member.name}</h3>
+            <p className="text-xs text-gray-500 mt-2">{member.bio}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</div>
+
     </section>
   );
 }

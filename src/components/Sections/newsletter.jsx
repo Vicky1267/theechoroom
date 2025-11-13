@@ -32,7 +32,7 @@ const Newsletter = () => {
   return (
      <section className="relative isolate overflow-hidden darkBg py-[5rem] sm:py-[6rem] lg:py-[8rem]">
       <div className="mx-auto max-w-[90rem] px-[1.5rem] lg:px-[2rem]">
-        <div className="grid grid-cols-3 gap-x-[2rem] gap-y-[2rem]">
+        <div className="newsletter-grid">
                   {/* LEFT SECTION */}
           <div>
             <h2 className="text-[2.25rem] font-bold text-[white] tracking-tight">

@@ -9,7 +9,7 @@ import Voice4 from '../../assets/img/voices/4.jpg';
 const Voices = () => {
    useEffect(() => {
     setDocumentHead({
-      title: "Voices | The Echo Room",
+      title: "The Echo Room",
       description:
         "Hear the stories, opinions, and creative expressions of young Africans who are shaping the future.",
     });
@@ -79,7 +79,7 @@ const voices = [
       </section>
 
       {/* Categories */}
-      <div className="flex flex-wrap justify-center gap-[1rem] mb-[3rem]">
+      <div className="w-full flex flex-wrap justify-center gap-[1rem] mb-[3rem]">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -96,42 +96,39 @@ const voices = [
       </div>
 
       {/* Voice Cards */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[2rem] px-[1.5rem] md:px-[3rem]">
-        {filteredVoices.map((voice) => (
-          <div
-            key={voice.id}
-            className="bg-gray-50 rounded-[1.5rem] shadow-[0_2px_10px_rgba(0,0,0,0.1)] overflow-hidden hover:shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-300"
-          >
-            <img
-              src={voice.image}
-              alt={voice.name}
-              className="w-[45%] h-[80%] object-cover"
-            />
-            <div className="p-[1.25rem]">
-              <p className="text-[#0a1a2f] text-sm font-semibold mb-[0.25rem]">
-                {voice.category}
-              </p>
-              <h3 className="font-semibold text-lg mb-[0.5rem] text-gray-900">
-                {voice.name}
-              </h3>
-              <p className="text-gray-700 italic mb-[1rem]">“{voice.quote}”</p>
-             <button
-  onClick={() => {
-    console.log("Clicked story button");
-    setActiveStory(voice);
-    console.log("Active story is now:", voice.name);
+      <section className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 md:px-12">
+  {filteredVoices.map((voice) => (
+    <div
+      key={voice.id}
+      className="w-full bg-gray-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
+    >
+      <img
+        src={voice.image}
+        alt={voice.name}
+        className="w-[50%] place-items-center sm:w-3/4 md:w-full h-48 sm:h-56 object-cover mx-auto mt-4"
+      />
+      <div className="p-4 sm:p-5">
+        <p className="text-sm font-semibold text-[#0a1a2f] mb-1">
+          {voice.category}
+        </p>
+        <h3 className="font-semibold text-lg mb-2 text-gray-900">
+          {voice.name}
+        </h3>
+        <p className="text-gray-700 italic mb-4">“{voice.quote}”</p>
+        <button
+          onClick={() => {
+            setActiveStory(voice);
+            console.log("Active story is now:", voice.name);
+          }}
+          className="text-[#0a1a2f] font-medium hover:underline"
+        >
+          Read More →
+        </button>
+      </div>
+    </div>
+  ))}
+</section>
 
-  }}
-  
-  className="text-[#0a1a2f] font-medium hover:underline"
->
-  Read More →
-</button>
-
-            </div>
-          </div>
-        ))}
-      </section>
 
          {/* ✅ Modal for Full Story */}
  {activeStory && (
@@ -181,10 +178,10 @@ const voices = [
       </button>
 
       {/* Story content */}
-      <h2 style={{ fontSize: "1.75rem", fontWeight: "bold", marginBottom: "1rem" }}>
+      <h2 className="story-title">
         {activeStory.name}
       </h2>
-      <p style={{ fontSize: "1rem", lineHeight: "1.6", marginBottom: "1.5rem" }}>
+      <p className="story-text">
         {activeStory.fullStory}
       </p>
 
@@ -211,7 +208,7 @@ const voices = [
 
 
       {/* Submit Your Voice Form */}
-      <section id = "share" className="mt-[5rem] bg-[#f3f6fb] py-[4rem] px-[1.5rem] md:px-[3rem] text-center">
+      <section id = "share" className="mt-[5rem] bg-[#f3f6fb] py-[1rem] px-[1.5rem] md:px-[3rem] text-center">
         <h3 className="text-[2rem] font-bold text-[#0a1a2f] mb-[1rem]">
           Share Your Echo
         </h3>
@@ -221,8 +218,10 @@ const voices = [
         </p>
 
         <form
+          action="https://formspree.io/f/xovyqgvz"
+          method="POST"
           className="max-w-[36rem] mx-auto bg-white p-[2rem] rounded-[1.5rem] shadow-[0_2px_12px_rgba(0,0,0,0.08)] text-left"
-          onSubmit={(e) => e.preventDefault()}
+          
         >
           <div className="mb-[1rem]">
             <label htmlFor="name" className="block text-[gray/700] mb-[0.5rem]">

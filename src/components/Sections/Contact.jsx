@@ -6,7 +6,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa"
 const Contact = () => {
   useEffect(() => {
     setDocumentHead({
-      title: "Contact | The Echo Room",
+      title: "The Echo Room",
       description:
         "Get in touch with The Echo Room team — collaborate, contribute, or share your voice with our growing community.",
     });
@@ -24,7 +24,7 @@ const Contact = () => {
   };
 
   return (
-    <div id="contact" className="bg-[#f9fafb] min-h-screen flex flex-col justify-center items-center py-[60px] px-[20px] text-[#0a1a2f] relative">
+    <div id="contact" className="bg-[#f9fafb] min-h-screen flex flex-col justify-center items-center py-[50px] px-[20px] text-[#0a1a2f] relative">
       {/* Header */}
       <div className="text-center mb-[40px]">
         <h1 className="text-[2.5rem] font-bold mb-[10px]">Contact Us</h1>
